@@ -1,25 +1,25 @@
+// src/NotificationList.jsx
 import React from 'react';
 
 const NotificationList = ({ notifications, onClear, onClearAll }) => {
-    return (
-        <div>
-            {notifications.length === 0 ? (
-                <p>No notifications available.</p>
-            ) : (
-                <ul>
-                    {notifications.map(notification => (
-                        <li key={notification.id} className="notification"> {/* Add class here */}
-                            <strong>{notification.name}:</strong> {notification.message} 
-                            <button onClick={() => onClear(notification.id)}>Clear</button>
-                        </li>
-                    ))}
-                </ul>
-            )}
-            {notifications.length > 0 && (
-                <button onClick={onClearAll}>Clear All Notifications</button>
-            )}
+  if (!notifications || notifications.length === 0) {
+    return <p>No notifications available.</p>;
+  }
+
+  return (
+    <div>
+      <h2>Notifications ({notifications.length})</h2>
+      {notifications.map((notification) => (
+        <div key={notification.id} className="notification">
+          <p>
+            <strong>{notification.name}:</strong> {notification.message}
+          </p>
+          <button onClick={() => onClear(notification.id)}>Clear</button>
         </div>
-    );
+      ))}
+      <button onClick={onClearAll}>Clear All Notifications</button>
+    </div>
+  );
 };
 
 export default NotificationList;

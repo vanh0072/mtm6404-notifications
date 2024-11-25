@@ -1,4 +1,4 @@
-export default [
+export const notifications = [
   {
     "id": 1,
     "name": "Charlene Clements",

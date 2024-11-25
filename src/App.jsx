@@ -1,28 +1,32 @@
+// src/App.jsx
 import React, { useState } from 'react';
-import { notifications } from './notifications';
-import NotificationList from './NotificationList';
+import { notifications as initialNotifications } from './notifications'; // Import notifications
+import NotificationList from './NotificationList'; // Import NotificationList component
+import './index.css'; // Import the CSS
 
-function App() {
-    const [notificationList, setNotificationList] = useState(notifications);
+const App = () => {
+  const [notifications, setNotifications] = useState(initialNotifications);
 
-    const clearNotification = (id) => {
-        setNotificationList(notificationList.filter(notification => notification.id !== id));
-    };
+  // Handle clearing an individual notification
+  const handleClearNotification = (id) => {
+    setNotifications(notifications.filter(notification => notification.id !== id));
+  };
 
-    const clearAllNotifications = () => {
-        setNotificationList([]);
-    };
+  // Handle clearing all notifications
+  const handleClearAllNotifications = () => {
+    setNotifications([]);
+  };
 
-    return (
-        <div className="app">
-            <h1>Notifications ({notificationList.length})</h1>
-            <NotificationList 
-                notifications={notificationList} 
-                onClear={clearNotification}
-                onClearAll={clearAllNotifications}
-            />
-        </div>
-    );
-}
+  return (
+    <div>
+      <h1>Notifications</h1>
+      <NotificationList 
+        notifications={notifications} 
+        onClear={handleClearNotification} 
+        onClearAll={handleClearAllNotifications} 
+      />
+    </div>
+  );
+};
 
 export default App;
